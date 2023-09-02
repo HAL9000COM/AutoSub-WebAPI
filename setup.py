@@ -4,7 +4,7 @@ from setuptools import setup
 DIR = os.path.dirname(os.path.abspath(__file__))
 INSTALL_PACKAGES = open(os.path.join(DIR, 'requirements.txt')).read().splitlines()
 
-with open("README.md", "r") as fh:
+with open("README.md", "r",encoding="utf-8") as fh:
     README = fh.read()
 
 setup(
@@ -24,7 +24,7 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='<=3.9',
+    python_requires='<3.10',
     entry_points={
         "console_scripts": ["autosub=autosub:main.main"]
     },

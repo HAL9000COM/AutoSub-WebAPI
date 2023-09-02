@@ -1,29 +1,36 @@
-ARG BASEIMAGE=ubuntu:18.04
+ARG BASEIMAGE=python:3.9-bookworm
 #ARG BASEIMAGE=nvidia/cuda:10.1-cudnn7-runtime-ubuntu18.04
 
 FROM ${BASEIMAGE}
 
+WORKDIR /app
+
 ARG DEPSLIST=requirements.txt
 #ARG DEPSLIST=requirements-gpu.txt
 
-ENV PYTHONUNBUFFERED 1
 
-COPY *.pbmm ./
-COPY *.scorer ./
+
+COPY models ./models
 COPY setup.py ./
 COPY autosub ./autosub
+COPY README.md ./
+COPY webapi.py ./
 
-RUN DEBIAN_FRONTEND=noninteractive apt update && \
-    apt -y install ffmpeg libsm6 libxext6 python3 python3-pip && \
-    apt -y clean && \
-	rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get -y install ffmpeg libsm6 libxext6  && \
+    apt-get -y clean && \
+    rm -rf /var/lib/apt/lists/*
 
 COPY $DEPSLIST ./requirements.txt
 
 # make sure pip is up-to-date
 RUN python3 -m pip install --upgrade pip
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir .
 
 RUN mkdir audio output
+#run python in docker
 
-ENTRYPOINT ["python3", "autosub/main.py"]
+
+ENV CLI_ARGS=""
+EXPOSE 5000
+CMD python webapi.py $CLI_ARGS
