@@ -10,5 +10,5 @@ fi
 model_url=https://github.com/mozilla/DeepSpeech/releases/download/v$model/deepspeech-$model-models.pbmm
 scorer_url=https://github.com/mozilla/DeepSpeech/releases/download/v$model/deepspeech-$model-models.scorer
 
-wget ${model_url} && wget ${scorer_url}
+wget -P ./models ${model_url} && wget -P ./models ${scorer_url}
 
