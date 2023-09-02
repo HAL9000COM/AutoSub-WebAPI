@@ -4,7 +4,7 @@ from setuptools import setup
 DIR = os.path.dirname(os.path.abspath(__file__))
 INSTALL_PACKAGES = open(os.path.join(DIR, 'requirements.txt')).read().splitlines()
 
-with open("README.md", "r",encoding="utf-8") as fh:
+with open("README_AutoSub.md", "r",encoding="utf-8") as fh:
     README = fh.read()
 
 setup(
