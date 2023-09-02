@@ -1,6 +1,6 @@
 cycler==0.10.0
 numpy
-stt==1.0.0
+stt
 deepspeech==0.9.3
 joblib==0.16.0
 kiwisolver==1.2.0
@@ -11,3 +11,5 @@ scikit-learn
 scipy==1.9.3
 six==1.15.0
 tqdm==4.44.1
+flask
+cherrypy
